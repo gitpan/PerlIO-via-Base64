@@ -3,7 +3,7 @@ package PerlIO::via::Base64;
 # Set the version info
 # Make sure we do things by the book from now on
 
-$VERSION = '0.05';
+$VERSION = '0.06';
 use strict;
 
 # Make sure the encoding/decoding stuff is available
@@ -101,7 +101,8 @@ sub FLUSH {
 } #FLUSH
 
 #-----------------------------------------------------------------------
-#  IN: class for which to import
+#  IN: 1 class for which to import
+#      2..N parameters passed in -use-
 
 sub import {
 
@@ -181,9 +182,8 @@ L<PerlIO::via>, L<MIME::Base64> and any other PerlIO::via modules on CPAN.
 
 =head1 COPYRIGHT
 
-Copyright (c) 2002 Elizabeth Mattijsen.
-
-This library is free software; you can redistribute it and/or
+Copyright (c) 2002-2003 Elizabeth Mattijsen <liz@dijkmat.nl>. All rights
+reserved.  This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
 
 =cut

@@ -12,6 +12,8 @@ BEGIN {				# Magic Perl CORE pragma
     }
 }
 
+use strict;
+use warnings;
 use Test::More tests => 24;
 
 BEGIN { use_ok('PerlIO::via::Base64') }
@@ -79,7 +81,7 @@ is( PerlIO::via::Base64->eol,'',	'check eol setting second time' );
 # Create the encoded test-file
 
 ok(
- open( my $out,'>:via(Base64)', $file ),
+ open( $out,'>:via(Base64)', $file ),
  "opening '$file' for writing without eol"
 );
 
@@ -98,7 +100,7 @@ ok( close( $test ),			'close test handle without eol' );
 # Check decoding _with_ layers
 
 ok(
- open( my $in,'<:via(Base64)', $file ),
+ open( $in,'<:via(Base64)', $file ),
  "opening '$file' for reading without eol"
 );
 is( join( '',<$in> ),$decoded,		'check decoding without eol' );

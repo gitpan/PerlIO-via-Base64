@@ -11,9 +11,8 @@ EOD
 
 WriteMakefile (
  NAME		=> "PerlIO::via::Base64",
- ($[ >= 5.005) ?
- (AUTHOR	=> 'Elizabeth Mattijsen (liz@dijkmat.nl)',
-  ABSTRACT	=> 'PerlIO Layer for quoted-printable encoding') : (),
+ AUTHOR		=> 'Elizabeth Mattijsen (liz@dijkmat.nl)',
+ ABSTRACT	=> 'PerlIO Layer for Base64 (MIME) encoding',
  VERSION_FROM	=> 'lib/PerlIO/via/Base64.pm',
  PREREQ_PM	=> {
                     'MIME::Base64' => 0,

@@ -1,3 +1,7 @@
+0.06	13 August 2003
+	Cleaned up Makefile.PL and updated copright messaged.  Made sure the
+	test-suite runs under strict and warnings.
+
 0.05	21 July 2002
 	Added import() method so that you can now specify the line ending mode
 	in the -use- statement.  Adapted test-suite accordingly.

@@ -6,3 +6,4 @@ VERSION
 Makefile.PL
 lib/PerlIO/via/Base64.pm
 t/Base64.t
+META.yml                                Module meta-data (added by MakeMaker)
