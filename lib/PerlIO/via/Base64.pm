@@ -3,7 +3,7 @@ package PerlIO::via::Base64;
 # Set the version info
 # Make sure we do things by the book from now on
 
-$VERSION = '0.06';
+$VERSION = '0.07';
 use strict;
 
 # Make sure the encoding/decoding stuff is available
@@ -168,6 +168,10 @@ that file.
 If it were possible to pass parameters such as this to the layer while opening
 the file, that would have been the approach taken.  Since that is not possible
 yet, this way of doing it seems to be the next best thing.
+
+=head1 REQUIRED MODULES
+
+ MIME::Base64 (any)
 
 =head1 CAVEAT
 
