@@ -1,3 +1,9 @@
+0.05	21 July 2002
+	Added import() method so that you can now specify the line ending mode
+	in the -use- statement.  Adapted test-suite accordingly.
+
+	Added "can_ok" check to test-suite.
+
 0.04	11 July 2002
 	Upgraded test-suite to make it ready for Perl core inclusion (if that
 	ever happens).  Added check for PerlIO and EBCDIC also, by courtesy of

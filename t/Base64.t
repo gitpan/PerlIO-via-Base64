@@ -12,9 +12,10 @@ BEGIN {				# Magic Perl CORE pragma
     }
 }
 
-use Test::More tests => 22;
+use Test::More tests => 24;
 
 BEGIN { use_ok('PerlIO::via::Base64') }
+can_ok( 'PerlIO::via::Base64',qw(eol) );
 
 my $file = 'test.mime';
 
@@ -72,7 +73,7 @@ ok( close( $in ),			'close decoding handle' );
 
 # Do the same, now without line endings
 
-PerlIO::via::Base64->eol( '' );
+use_ok('PerlIO::via::Base64', eol => '');
 is( PerlIO::via::Base64->eol,'',	'check eol setting second time' );
 
 # Create the encoded test-file
@@ -88,7 +89,7 @@ ok( close( $out ),			'closing encoding handle without eol' );
 # Check encoding without layers
 
 {
-local $/ = undef;
+local $/;
 ok( open( my $test,$file ),		'opening without layer without eol' );
 is( readline( $test ),$encodednoeol,	'check encoded content without eol' );
 ok( close( $test ),			'close test handle without eol' );

@@ -3,7 +3,7 @@ package PerlIO::via::Base64;
 # Set the version info
 # Make sure we do things by the book from now on
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 use strict;
 
 # Make sure the encoding/decoding stuff is available
@@ -20,7 +20,7 @@ my $eol = "\n";
 
 #-----------------------------------------------------------------------
 
-# Methods for settings that will be used by the objects
+# Class methods
 
 #-----------------------------------------------------------------------
 
@@ -30,18 +30,16 @@ my $eol = "\n";
 
 sub eol {
 
-# Lose the class
 # Set the new value if one specified
 # Return whatever we have now
 
-    shift;
-    $eol = shift if @_; 
+    $eol = $_[1] if @_ >1; 
     $eol;
 } #eol
 
 #-----------------------------------------------------------------------
 
-# Methods for the actual layer implementation
+# Methods for standard Perl features
 
 #-----------------------------------------------------------------------
 #  IN: 1 class
@@ -62,7 +60,7 @@ sub FILL {
 # Read the line from the handle
 # Decode if there is something decode and return result or signal eof
 
-    local $/ = undef;
+    local $/;
     my $line = readline( $_[1] );
     (defined $line) ? MIME::Base64::decode_base64( $line ) : undef;
 } #FILL
@@ -102,6 +100,20 @@ sub FLUSH {
     0;
 } #FLUSH
 
+#-----------------------------------------------------------------------
+#  IN: class for which to import
+
+sub import {
+
+# Obtain the parameters
+# Loop for all the value pairs specified
+
+    my ($class,%param) = @_;
+    $class->$_( $param{$_} ) foreach keys %param;
+} #import
+
+#-----------------------------------------------------------------------
+
 __END__
 
 =head1 NAME
@@ -111,9 +123,10 @@ PerlIO::via::Base64 - PerlIO layer for base64 (MIME) encoded strings
 =head1 SYNOPSIS
 
  use PerlIO::via::Base64;
-
  PerlIO::via::Base64->eol( "\n" );  # default, write lines 76 bytes long
  PerlIO::via::Base64->eol( '' );    # no line endings, write one long string
+
+ use PerlIO::via::Base64 eol => "\n";
 
  open( my $in,'<:via(Base64)','file.mime' )
   or die "Can't open file.mime for reading: $!\n";
@@ -130,14 +143,17 @@ handle.
 
 =head1 CLASS METHODS
 
-There is one class method.
+There is one class method.  It can also be specified as a key value pair in
+the C<use> statement.
 
 =head2 eol
 
- $eol = PerlIO::via::Base64->eol;  # obtain current setting
+ use PerlIO::via::Base64 eol => '';
 
  PerlIO::via::Base64->eol( '' );   # no line endings, one long string
  open( my $out,'>:via(Base64)','file.mime' ); # no line endings
+
+ $eol = PerlIO::via::Base64->eol;  # obtain current setting
 
 MIME (Base64) encoded files can be written with line endings, causing all
 lines (except the last) to be exactly 76 bytes long.  By default a linefeed
@@ -161,8 +177,7 @@ processed buffers.
 
 =head1 SEE ALSO
 
-L<PerlIO::via>, L<MIME::Base64>, L<PerlIO::via::QuotedPrint>,
-L<PerlIO::via::MD5>, L<PerlIO::via::StripHTML>, L<PerlIO::via::Rotate>.
+L<PerlIO::via>, L<MIME::Base64> and any other PerlIO::via modules on CPAN.
 
 =head1 COPYRIGHT
 
