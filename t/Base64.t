@@ -1,8 +1,22 @@
+BEGIN {				# Magic Perl CORE pragma
+    if ($ENV{PERL_CORE}) {
+        chdir 't' if -d 't';
+        @INC = '../lib';
+    }
+    unless (find PerlIO::Layer 'perlio') {
+        print "1..0 # Skip: PerlIO not used\n";
+        exit 0;
+    }
+    if (ord("A") == 193) {
+        print "1..0 # Skip: EBCDIC\n";
+    }
+}
+
 use Test::More tests => 22;
 
 BEGIN { use_ok('PerlIO::via::Base64') }
 
-my $file = 't/test.mime';
+my $file = 'test.mime';
 
 my $decoded = <<EOD;
 This is a tést for MIME-encoded (base64) text that has hàrdly any speçial characters in it but which is nonetheless an indication of the real world.
@@ -50,7 +64,7 @@ ok( close( $test ),			'close test handle' );
 # Check decoding _with_ layers
 
 ok(
- open( my $in,'<:via(PerlIO::via::Base64)', $file ),
+ open( my $in,'<:via(Base64)', $file ),
  "opening '$file' for reading"
 );
 is( join( '',<$in> ),$decoded,		'check decoding' );
@@ -64,7 +78,7 @@ is( PerlIO::via::Base64->eol,'',	'check eol setting second time' );
 # Create the encoded test-file
 
 ok(
- open( my $out,'>:via(PerlIO::via::Base64)', $file ),
+ open( my $out,'>:via(Base64)', $file ),
  "opening '$file' for writing without eol"
 );
 
@@ -83,7 +97,7 @@ ok( close( $test ),			'close test handle without eol' );
 # Check decoding _with_ layers
 
 ok(
- open( my $in,'<:via(PerlIO::via::Base64)', $file ),
+ open( my $in,'<:via(Base64)', $file ),
  "opening '$file' for reading without eol"
 );
 is( join( '',<$in> ),$decoded,		'check decoding without eol' );

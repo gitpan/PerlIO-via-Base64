@@ -5,4 +5,4 @@ TODO
 VERSION
 Makefile.PL
 lib/PerlIO/via/Base64.pm
-t/01basic.t
+t/Base64.t
