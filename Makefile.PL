@@ -10,11 +10,11 @@ warn <<EOD unless $Config{useperlio};
 EOD
 
 WriteMakefile (
- NAME		=> "PerlIO::Via::Base64",
+ NAME		=> "PerlIO::via::Base64",
  ($[ >= 5.005) ?
  (AUTHOR	=> 'Elizabeth Mattijsen (liz@dijkmat.nl)',
   ABSTRACT	=> 'PerlIO Layer for quoted-printable encoding') : (),
- VERSION_FROM	=> 'lib/PerlIO/Via/Base64.pm',
+ VERSION_FROM	=> 'lib/PerlIO/via/Base64.pm',
  PREREQ_PM	=> {
                     'MIME::Base64' => 0,
                    },

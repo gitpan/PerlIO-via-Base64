@@ -1,7 +1,7 @@
-README for PerlIO::Via::Base64
+README for PerlIO::via::Base64
 
 PerlIO layer that handles automatic conversion from and to Base64 (MIME)
-format.  Intended to be used while opening a file with the ":Via()" PerlIO
+format.  Intended to be used while opening a file with the ":via()" PerlIO
 layer.
 
 Copyright (c) 2002 Elizabeth Mattijsen <liz@dijkmat.nl>. All rights

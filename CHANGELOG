@@ -1,2 +1,10 @@
+0.03	10 July 2002
+	Moved to the PerlIO::via namespace.
+
+0.02	9 July 2002
+	Fixed some documentation nits reported by Rafael Garcia-Suarez.
+
+	Version number now a '' string (oops).
+
 0.01    1 July 2002
 	Migrated from the now obsoleted IOLayer:: namespace.

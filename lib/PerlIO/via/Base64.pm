@@ -1,10 +1,10 @@
-package PerlIO::Via::Base64;
+package PerlIO::via::Base64;
 
 # Make sure we do things by the book
 # Set the version info
 
 use strict;
-$PerlIO::Via::Base64::VERSION = 0.01;
+$PerlIO::via::Base64::VERSION = '0.03';
 
 # Make sure the encoding/decoding stuff is available
 
@@ -13,6 +13,10 @@ use MIME::Base64 (); # no need to pollute this namespace
 # Set the default setting for the end of line character
 
 my $eol = "\n";
+
+# Satisfy -require-
+
+1;
 
 #-----------------------------------------------------------------------
 
@@ -98,27 +102,23 @@ sub FLUSH {
     0;
 } #FLUSH
 
-# Satisfy -require-
-
-1;
-
 __END__
 
 =head1 NAME
 
-PerlIO::Via::Base64 - PerlIO layer for base64 (MIME) encoded strings
+PerlIO::via::Base64 - PerlIO layer for base64 (MIME) encoded strings
 
 =head1 SYNOPSIS
 
- use PerlIO::Via::Base64;
+ use PerlIO::via::Base64;
 
- PerlIO::Via::Base64->eol( "\n" );  # default, write lines 76 bytes long
- PerlIO::Via::Base64->eol( '' );    # no line endings, write one long string
+ PerlIO::via::Base64->eol( "\n" );  # default, write lines 76 bytes long
+ PerlIO::via::Base64->eol( '' );    # no line endings, write one long string
 
- open( my $in,'<Via(PerlIO::Via::Base64)','file.mime' )
+ open( my $in,'<:via(Base64)','file.mime' )
   or die "Can't open file.mime for reading: $!\n";
  
- open( my $out,'>Via(PerlIO::Via::Base64)','file.mime' )
+ open( my $out,'>:via(Base64)','file.mime' )
   or die "Can't open file.mime for writing: $!\n";
 
 =head1 DESCRIPTION
@@ -134,10 +134,10 @@ There is one class method.
 
 =head2 eol
 
- $eol = PerlIO::Via::Base64->eol;  # obtain current setting
+ $eol = PerlIO::via::Base64->eol;  # obtain current setting
 
- PerlIO::Via::Base64->eol( '' );   # no line endings, one long string
- open( my $out,'>Via(PerlIO::Via::Base64)','file.mime' ); # no line endings
+ PerlIO::via::Base64->eol( '' );   # no line endings, one long string
+ open( my $out,'>:via(Base64)','file.mime' ); # no line endings
 
 MIME (Base64) encoded files can be written with line endings, causing all
 lines (except the last) to be exactly 76 bytes long.  By default a linefeed
@@ -161,8 +161,8 @@ processed buffers.
 
 =head1 SEE ALSO
 
-L<PerlIO::Via>, L<MIME::Base64>, L<PerlIO::Via::QuotedPrint>,
-L<PerlIO::Via::MD5>, L<PerlIO::Via::StripHTML>.
+L<PerlIO::via>, L<MIME::Base64>, L<PerlIO::via::QuotedPrint>,
+L<PerlIO::via::MD5>, L<PerlIO::via::StripHTML>, L<PerlIO::via::Rotate>.
 
 =head1 COPYRIGHT
 

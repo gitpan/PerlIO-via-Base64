@@ -4,5 +4,5 @@ README
 TODO
 VERSION
 Makefile.PL
-lib/PerlIO/Via/Base64.pm
+lib/PerlIO/via/Base64.pm
 t/01basic.t
