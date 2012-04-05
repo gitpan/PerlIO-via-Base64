@@ -109,3 +109,4 @@ ok( close( $in ),			'close decoding handle without eol' );
 # Remove whatever we created now
 
 ok( unlink( $file ),			"remove test file '$file'" );
+1 while unlink $file; # multiversioned filesystems
